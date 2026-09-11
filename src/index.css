@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Color Tokens (Sophisticated Dark-First System) */
+    --background: #07090E;
+    --background-subtle: #0B0E17;
+    --foreground: #F8FAFC;
+    --muted: #94A3B8;
+    --muted-foreground: #64748B;
+    --border: rgba(255, 255, 255, 0.07);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-accent: rgba(99, 102, 241, 0.35);
+    --card: rgba(11, 14, 23, 0.75);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-hover: rgba(16, 21, 35, 0.85);
+    --accent: #6366F1;
+    --accent-cyan: #38BDF8;
+    --accent-muted: rgba(99, 102, 241, 0.12);
+    --emerald-status: #10B981;
+
+    /* Layout Orchestration Architecture (CSS Variables) */
+    --header-height: 4rem;
+    --sticky-top: 1.25rem;
+    --page-top-gap: 1.75rem;
+    --page-top-space: calc(var(--sticky-top) + var(--header-height) + var(--page-top-gap));
+    --container-width: 76rem;
+    --section-space: 6.5rem;
+    --card-radius: 1rem;
+    --card-radius-sm: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --header-height: 3.5rem;
+      --sticky-top: 0.75rem;
+      --page-top-gap: 1.25rem;
+      --section-space: 4.5rem;
+      --card-radius: 0.875rem;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Accessible focus ring */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Clean minimal scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #07090E;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #192033;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2D3748;
+  }
+}
+
+/* Background Gradients & Subtle Grid Overlay */
+.bg-grid-subtle {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Glassmorphism Card System */
+.glass-panel {
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(99, 102, 241, 0.28);
+  background: var(--card-hover);
+}
+
+/* Floating Sticky Navigation Container */
+.floating-nav-container {
+  top: var(--sticky-top);
+  height: var(--header-height);
+}
+
+/* Section Spacing Using Orchestrated Variable */
+.section-wrapper {
+  padding-top: var(--section-space);
+  padding-bottom: var(--section-space);
+}
+
+.hero-wrapper {
+  padding-top: var(--page-top-space);
+  padding-bottom: var(--section-space);
+}
+
+/* Profile Photo Frame & Orbit Animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(170px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(170px) rotate(-360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 24s linear infinite;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 30s linear infinite;
+}
+
+.animate-orbit {
+  animation: orbit 14s linear infinite;
+}
+
+/* Audio Spectrogram Waveform Animation */
+@keyframes audioWave {
+  0%, 100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* Scroll progress indicator */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6366F1, #38BDF8, #818CF8);
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+}
+
+/* Accessibility: Prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
